@@ -17,6 +17,28 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+const URL = "https://igl-app-v11.onrender.com/random?id=keepOn";
+
+// ⏱️ Har 1 second ping
+setInterval(async () => {
+  const start = Date.now();
+
+  try {
+    const response = await axios.get(URL);
+    const end = Date.now();
+
+    console.log("✅ RESPONSE:", response.data.random);
+    console.log("⏱️ TIME:", `${end - start} ms`);
+    console.log("────────────────────────");
+
+  } catch (error) {
+    const end = Date.now();
+    console.error("❌ ERROR:", error.message);
+    console.log("⏱️ TIME:", `${end - start} ms`);
+    console.log("────────────────────────");
+  }
+
+},  720000);
 
 // ===========================================
 // ⭐ ADVANCED REQUEST LOGGER
